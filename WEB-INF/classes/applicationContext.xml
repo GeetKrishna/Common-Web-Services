@@ -1,0 +1,21 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+           http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+	<context:component-scan base-package="com.sapient.statestreet.common.service" />
+	<context:annotation-config />
+
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:common-webservice.properties" />
+	
+	<bean id="employeeLookupService" class="com.sapient.statestreet.common.service.employeelookup.EmployeeLookupServiceImpl">
+		<constructor-arg name="securityPrincipal" value="${activeDirectory.securityPrincipal}"/>
+		<constructor-arg name="securityCredentials" value="${activeDirectory.securityCredentials}"/>
+		<constructor-arg name="initialContextFactory" value="${activeDirectory.context.initialContextFactory}"/>
+		<constructor-arg name="providerUrl" value="${activeDirectory.context.providerUrl}"/>
+		<constructor-arg name="recordsLimit" value="${activeDirectory.fetchRecordsLimit}"/>
+	</bean>
+</beans>
